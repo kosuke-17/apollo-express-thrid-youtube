@@ -7,10 +7,12 @@ import {
   ApolloServerPluginLandingPageLocalDefault,
   ApolloServerPluginLandingPageProductionDefault,
 } from "apollo-server-core";
+import cors from "cors";
 
 async function StartApolloServer() {
   const app = express();
   const PORT = process.env.PORT || 4000;
+  app.use(cors());
 
   /**
    * ApolloServerをインスタンス化
@@ -39,6 +41,7 @@ async function StartApolloServer() {
         : ApolloServerPluginLandingPageLocalDefault({ footer: false }),
     ],
   });
+
   // 起動
   await apolloServer.start();
 
