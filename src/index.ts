@@ -9,6 +9,7 @@ async function StartApolloServer() {
       hello: String
       numberOfAnimals: Int
       price: Float
+      isCool: Boolean
     }
   `;
 
@@ -22,6 +23,9 @@ async function StartApolloServer() {
       },
       price: () => {
         return 222.112234;
+      },
+      isCool: () => {
+        return false;
       },
     },
   };
