@@ -22,12 +22,14 @@ async function StartApolloServer() {
       quantity: Int!
       price: Float!
       onSale: Boolean!
+      # category: Category
     }
 
     # カテゴリーのデータ型
     type Category {
       id: ID!
       name: String!
+      products: [Product!]!
     }
   `;
 
@@ -50,6 +52,19 @@ async function StartApolloServer() {
         const category = categories.find((category) => category.id === id);
         if (!category) return null;
         return category;
+      },
+    },
+    Category: {
+      products: (
+        parent: { id: string },
+        _args: { id: string },
+        _context: any
+      ) => {
+        const { id } = parent;
+        const categories = products.filter(
+          (product) => product.categoryId === id
+        );
+        return categories;
       },
     },
   };
