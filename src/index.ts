@@ -1,6 +1,6 @@
 import { ApolloServer, gql } from "apollo-server-express";
 import express from "express";
-import { products } from "./db";
+import { categories, products } from "./db";
 
 async function StartApolloServer() {
   const app = express();
@@ -9,16 +9,25 @@ async function StartApolloServer() {
     type Query {
       products: [Product!]!
       product(id: ID!): Product
+      categories: [Category!]!
+      category(id: ID!): Category
     }
 
     # 商品のデータ型
     type Product {
+      id: ID!
       name: String!
       description: String!
       image: String!
       quantity: Int!
       price: Float!
       onSale: Boolean!
+    }
+
+    # カテゴリーのデータ型
+    type Category {
+      id: ID!
+      name: String!
     }
   `;
 
@@ -27,11 +36,20 @@ async function StartApolloServer() {
       products: () => {
         return products;
       },
-      product: (_parent: any, args: { id: any }, _context: any) => {
-        const productId = args.id;
-        const product = products.find((product) => product.id === productId);
+      product: (_parent: any, args: { id: string }, _context: any) => {
+        const { id } = args;
+        const product = products.find((product) => product.id === id);
         if (!product) return null;
         return product;
+      },
+      categories: () => {
+        return categories;
+      },
+      category: (_parent: any, args: { id: string }, _context: any) => {
+        const { id } = args;
+        const category = categories.find((category) => category.id === id);
+        if (!category) return null;
+        return category;
       },
     },
   };
