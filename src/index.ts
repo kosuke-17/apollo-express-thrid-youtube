@@ -6,26 +6,30 @@ async function StartApolloServer() {
   const PORT = 4000 || process.env.PORT;
   const typeDefs = gql`
     type Query {
-      hello: String
-      numberOfAnimals: Int
-      price: Float
-      isCool: Boolean
+      products: [Product!]!
+    }
+
+    type Product {
+      name: String!
+      description: String!
+      quantity: Int!
+      price: Float!
+      onSale: Boolean!
     }
   `;
 
   const resolvers = {
     Query: {
-      hello: () => {
-        return "hello world";
-      },
-      numberOfAnimals: () => {
-        return 55;
-      },
-      price: () => {
-        return 222.112234;
-      },
-      isCool: () => {
-        return false;
+      products: () => {
+        return [
+          {
+            name: "バイク",
+            description: "マウンテンバイクです",
+            quantity: 20,
+            price: 2022,
+            onSale: false,
+          },
+        ];
       },
     },
   };
