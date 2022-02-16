@@ -1,10 +1,8 @@
-import { products } from "../db";
+import { idStr, Products } from "../types";
 
 const Category = {
-  products: (parent: { id: string }, _args: { id: string }, _context: any) => {
-    const { id } = parent;
-    const categories = products.filter((product) => product.categoryId === id);
-    return categories;
+  products: ({ id }: idStr, _args: idStr, { products }: Products) => {
+    return products.filter((product) => product.categoryId === id);
   },
 };
 export default Category;

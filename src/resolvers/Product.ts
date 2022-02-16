@@ -1,9 +1,11 @@
-import { categories } from "../db";
+import { Categories, CategoryId } from "../types";
 
 const Product = {
-  category: (parent: { categoryId: any }, _args: any, _context: any) => {
-    const categoryId = parent.categoryId;
-
+  category: (
+    { categoryId }: CategoryId,
+    _args: any,
+    { categories }: Categories
+  ) => {
     return categories.find((category) => category.id === categoryId);
   },
 };

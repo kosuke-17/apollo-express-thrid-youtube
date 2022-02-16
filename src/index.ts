@@ -1,5 +1,6 @@
 import { ApolloServer } from "apollo-server-express";
 import express from "express";
+import { categories, products } from "./db";
 import { Query, Product, Category } from "./resolvers";
 import { typeDefs } from "./typeDefs";
 
@@ -10,6 +11,10 @@ async function StartApolloServer() {
   const apolloServer = new ApolloServer({
     typeDefs: typeDefs,
     resolvers: { Query, Product, Category },
+    context: {
+      categories,
+      products,
+    },
   });
   // 起動
   await apolloServer.start();
@@ -20,7 +25,7 @@ async function StartApolloServer() {
   });
 
   app.listen(PORT, () =>
-    console.log(`サーバー起動中 URL: http://localhost:${PORT}`)
+    console.log(`起動中 GraphQL PlayGround: http://localhost:${PORT}/graphql`)
   );
 }
 

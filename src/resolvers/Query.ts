@@ -1,23 +1,22 @@
-import { categories, products } from "../db";
+import { Categories, idStr, Products } from "../types";
 
+// 商品、またはカテゴリーの情報を返すリゾルバー
 const Query = {
-  products: () => {
+  // 商品一覧情報
+  products: (_parent: any, _args: idStr, { products }: Products) => {
     return products;
   },
-  product: (_parent: any, args: { id: string }, _context: any) => {
-    const { id } = args;
-    const product = products.find((product) => product.id === id);
-    if (!product) return null;
-    return product;
+  // idに紐づく商品詳細情報
+  product: (_parent: any, { id }: idStr, { products }: Products) => {
+    return products.find((product) => product.id === id);
   },
-  categories: () => {
+  // カテゴリー一覧情報
+  categories: (_parent: any, _args: idStr, { categories }: Categories) => {
     return categories;
   },
-  category: (_parent: any, args: { id: string }, _context: any) => {
-    const { id } = args;
-    const category = categories.find((category) => category.id === id);
-    if (!category) return null;
-    return category;
+  // idに紐づくカテゴリー詳細情報
+  category: (_parent: any, { id }: idStr, { categories }: Categories) => {
+    return categories.find((category) => category.id === id);
   },
 };
 
