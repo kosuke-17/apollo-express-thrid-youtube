@@ -17,6 +17,7 @@ export const typeDefs = gql`
     price: Float!
     onSale: Boolean!
     category: Category
+    reviews: [Review!]!
   }
 
   # カテゴリーのデータ型
@@ -24,5 +25,15 @@ export const typeDefs = gql`
     id: ID!
     name: String!
     products: [Product!]!
+  }
+
+  # 商品レビューのデータ型
+  type Review {
+    id: ID!
+    date: String!
+    title: String!
+    comment: String!
+    rating: Int!
+    product: Product
   }
 `;

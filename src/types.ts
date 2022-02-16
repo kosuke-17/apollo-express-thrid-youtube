@@ -23,3 +23,14 @@ export type Category = {
 
 export type Categories = { categories: Category[] };
 export type CategoryId = { categoryId: Category["id"] };
+
+export type Review = {
+  id: string;
+  date: string;
+  title: string;
+  comment: string;
+  rating: number;
+  productId: string;
+};
+
+export type Reviews = { reviews: Review[] };

@@ -1,6 +1,6 @@
 import { ApolloServer } from "apollo-server-express";
 import express from "express";
-import { categories, products } from "./db";
+import { categories, products, reviews } from "./db";
 import { Query, Product, Category } from "./resolvers";
 import { typeDefs } from "./typeDefs";
 
@@ -14,6 +14,7 @@ async function StartApolloServer() {
     context: {
       categories,
       products,
+      reviews,
     },
   });
   // 起動
