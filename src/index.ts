@@ -8,6 +8,7 @@ async function StartApolloServer() {
     type Query {
       hello: String
       numberOfAnimals: Int
+      price: Float
     }
   `;
 
@@ -18,6 +19,9 @@ async function StartApolloServer() {
       },
       numberOfAnimals: () => {
         return 55;
+      },
+      price: () => {
+        return 222.112234;
       },
     },
   };
