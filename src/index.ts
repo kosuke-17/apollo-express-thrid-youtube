@@ -3,6 +3,10 @@ import express from "express";
 import { categories, products, reviews } from "./db";
 import { Query, Product, Category } from "./resolvers";
 import { typeDefs } from "./typeDefs";
+import {
+  ApolloServerPluginLandingPageLocalDefault,
+  ApolloServerPluginLandingPageProductionDefault,
+} from "apollo-server-core";
 
 async function StartApolloServer() {
   const app = express();
@@ -25,6 +29,15 @@ async function StartApolloServer() {
       products,
       reviews,
     },
+    plugins: [
+      // Install a landing page plugin based on NODE_ENV
+      process.env.NODE_ENV === "production"
+        ? ApolloServerPluginLandingPageProductionDefault({
+            graphRef: "my-graph-id@my-graph-variant",
+            footer: false,
+          })
+        : ApolloServerPluginLandingPageLocalDefault({ footer: false }),
+    ],
   });
   // 起動
   await apolloServer.start();
