@@ -16,5 +16,18 @@
   "bugs": {
     "url": "https://github.com/kosuke-17/apollo-express-thrid-youtube/issues"
   },
-  "homepage": "https://github.com/kosuke-17/apollo-express-thrid-youtube#readme"
+  "homepage": "https://github.com/kosuke-17/apollo-express-thrid-youtube#readme",
+  "devDependencies": {
+    "@types/node": "^17.0.18",
+    "dotenv": "^16.0.0",
+    "nodemon": "^2.0.15",
+    "ts-node": "^10.5.0",
+    "typescript": "^4.5.5"
+  },
+  "dependencies": {
+    "apollo-server-express": "^3.6.3",
+    "express": "^4.17.2",
+    "graphql": "^16.3.0",
+    "mongoose": "^6.2.1"
+  }
 }
