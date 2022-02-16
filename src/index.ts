@@ -8,6 +8,15 @@ async function StartApolloServer() {
   const app = express();
   const PORT = 4000 || process.env.PORT;
 
+  /**
+   * ApolloServerをインスタンス化
+   *
+   * @param
+   *  - typeDefs : スキーマ定義
+   *  - resolvers : スキーマに紐づいたデータの処理
+   *  - context : dbファイルから取得してきた仮データをresokbersに共有
+   *
+   */
   const apolloServer = new ApolloServer({
     typeDefs: typeDefs,
     resolvers: { Query, Product, Category },
@@ -20,6 +29,7 @@ async function StartApolloServer() {
   // 起動
   await apolloServer.start();
 
+  // expressをミドルウェアとしてアポロサーバーに適応
   apolloServer.applyMiddleware({ app: app });
   app.use((_req, res) => {
     res.send("初めてのApollo Server");
