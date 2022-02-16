@@ -1,6 +1,6 @@
 import { ApolloServer } from "apollo-server-express";
 import express from "express";
-import { resolvers } from "./resolvers";
+import { Query, Product, Category } from "./resolvers";
 import { typeDefs } from "./typeDefs";
 
 async function StartApolloServer() {
@@ -9,7 +9,7 @@ async function StartApolloServer() {
 
   const apolloServer = new ApolloServer({
     typeDefs: typeDefs,
-    resolvers: resolvers,
+    resolvers: { Query, Product, Category },
   });
   // 起動
   await apolloServer.start();
