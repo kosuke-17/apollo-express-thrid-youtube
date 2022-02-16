@@ -1,5 +1,6 @@
 import { ApolloServer, gql } from "apollo-server-express";
 import express from "express";
+import { products } from "./db";
 
 async function StartApolloServer() {
   const app = express();
@@ -7,11 +8,14 @@ async function StartApolloServer() {
   const typeDefs = gql`
     type Query {
       products: [Product!]!
+      product(id: ID!): Product
     }
 
+    # 商品のデータ型
     type Product {
       name: String!
       description: String!
+      image: String!
       quantity: Int!
       price: Float!
       onSale: Boolean!
@@ -21,15 +25,13 @@ async function StartApolloServer() {
   const resolvers = {
     Query: {
       products: () => {
-        return [
-          {
-            name: "バイク",
-            description: "マウンテンバイクです",
-            quantity: 20,
-            price: 2022,
-            onSale: false,
-          },
-        ];
+        return products;
+      },
+      product: (_parent: any, args: { id: any }, _context: any) => {
+        const productId = args.id;
+        const product = products.find((product) => product.id === productId);
+        if (!product) return null;
+        return product;
       },
     },
   };
