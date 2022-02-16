@@ -22,7 +22,7 @@ async function StartApolloServer() {
       quantity: Int!
       price: Float!
       onSale: Boolean!
-      # category: Category
+      category: Category
     }
 
     # カテゴリーのデータ型
@@ -67,6 +67,13 @@ async function StartApolloServer() {
         return categories;
       },
     },
+    Product: {
+      category: (parent: { categoryId: any }, _args: any, _context: any) => {
+        const categoryId = parent.categoryId;
+
+        return categories.find((category) => category.id === categoryId);
+      },
+    },
   };
   const apolloServer = new ApolloServer({
     typeDefs: typeDefs,
@@ -76,7 +83,7 @@ async function StartApolloServer() {
   await apolloServer.start();
 
   apolloServer.applyMiddleware({ app: app });
-  app.use((req, res) => {
+  app.use((_req, res) => {
     res.send("初めてのApollo Server");
   });
 
