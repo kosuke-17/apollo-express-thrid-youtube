@@ -14,7 +14,6 @@ const Query = {
       // filterメソッドで真偽値がtrue
       if (onSale) {
         filteredProducts = filteredProducts.filter((product) => product.onSale);
-        console.dir(filteredProducts);
       }
       // 商品の評価平均値がavgより低いか高いかを真偽値で記述
       if (rangeNum.includes(avgRating)) {

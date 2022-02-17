@@ -36,6 +36,14 @@ const Mutation = {
     categories.push(newCategory);
     return newCategory;
   },
+  /**
+   * 商品追加処理.
+   *
+   * @param _parent - 親リゾルバから受け取るオブジェクト
+   * @param args - 追加したい商品情報
+   * @param context - 商品一覧情報
+   * @returns 追加した商品情報
+   */
   addProduct: (_parent: any, { input }: any, { products }: any) => {
     const { name, description, image, quantity, price, onSale, CategoryId } =
       input;
@@ -54,6 +62,28 @@ const Mutation = {
     products.push(newProduct);
 
     return newProduct;
+  },
+
+  /**
+   * レビュー追加処理.
+   *
+   * @param _parent - 親リゾルバから受け取るオブジェクト
+   * @param args - 追加したいレビュー情報
+   * @param context - レビュー一覧情報
+   * @returns 追加した商品情報
+   */
+  addReview: (_parent: any, { input }: any, { reviews }: any) => {
+    const { title, comment, date, rating, productId } = input;
+    const newReview = {
+      id: uuid(),
+      title,
+      comment,
+      date,
+      rating,
+      productId,
+    };
+    reviews.push(newReview);
+    return newReview;
   },
 };
 
