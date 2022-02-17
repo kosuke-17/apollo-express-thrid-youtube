@@ -1,7 +1,7 @@
 import { ApolloServer } from "apollo-server-express";
 import express from "express";
 import { categories, products, reviews } from "./db";
-import { Query, Product, Category } from "./resolvers";
+import { Query, Product, Category, Mutation } from "./resolvers";
 import { typeDefs } from "./typeDefs";
 import {
   ApolloServerPluginLandingPageLocalDefault,
@@ -20,12 +20,12 @@ async function StartApolloServer() {
    * @param
    *  - typeDefs : スキーマ定義
    *  - resolvers : スキーマに紐づいたデータの処理
-   *  - context : dbファイルから取得してきた仮データをresokbersに共有
+   *  - context : dbファイルから取得してきたデータをresolversに共有
    *
    */
   const apolloServer = new ApolloServer({
     typeDefs: typeDefs,
-    resolvers: { Query, Product, Category },
+    resolvers: { Query, Product, Category, Mutation },
     context: {
       categories,
       products,
