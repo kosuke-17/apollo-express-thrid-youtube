@@ -1,6 +1,9 @@
 import { gql } from "apollo-server-express";
 export const typeDefs = gql`
   type Query {
+    """
+    商品一覧情報を取得。filter : { onSale: 真偽値, avgRating: レビュー評価平均値}
+    """
     products(filter: ProductsFilterInput): [Product!]!
     product(id: ID!): Product
     categories: [Category!]!
@@ -40,5 +43,13 @@ export const typeDefs = gql`
   input ProductsFilterInput {
     onSale: Boolean
     avgRating: Int
+  }
+
+  type Mutation {
+    addCategory(input: AddCategoryInput): Category!
+  }
+
+  input AddCategoryInput {
+    name: String!
   }
 `;
