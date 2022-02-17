@@ -21,6 +21,7 @@
   "homepage": "https://github.com/kosuke-17/apollo-express-thrid-youtube#readme",
   "devDependencies": {
     "@types/node": "^17.0.18",
+    "@types/uuid": "^8.3.4",
     "dotenv": "^16.0.0",
     "nodemon": "^2.0.15",
     "ts-node": "^10.5.0",
@@ -31,6 +32,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.2",
     "graphql": "^16.3.0",
-    "mongoose": "^6.2.1"
+    "mongoose": "^6.2.1",
+    "uuid": "^8.3.2"
   }
 }
