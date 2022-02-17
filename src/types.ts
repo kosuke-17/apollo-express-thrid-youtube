@@ -1,3 +1,4 @@
+// QueryTYpe
 export type idStr = {
   id: string;
 };
@@ -34,3 +35,6 @@ export type Review = {
 };
 
 export type Reviews = { reviews: Review[] };
+
+// MutationType
+export type InputName = { input: { name: string } };
