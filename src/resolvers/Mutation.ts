@@ -36,7 +36,25 @@ const Mutation = {
     categories.push(newCategory);
     return newCategory;
   },
-  addProduct: (_parent: any, { input }: InputName, { categories }: any) => {},
+  addProduct: (_parent: any, { input }: any, { products }: any) => {
+    const { name, description, image, quantity, price, onSale, CategoryId } =
+      input;
+
+    const newProduct = {
+      id: uuid(),
+      name,
+      description,
+      image,
+      quantity,
+      price,
+      onSale,
+      CategoryId,
+    };
+
+    products.push(newProduct);
+
+    return newProduct;
+  },
 };
 
 export default Mutation;
