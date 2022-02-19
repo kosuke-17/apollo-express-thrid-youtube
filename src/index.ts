@@ -1,6 +1,6 @@
 import { ApolloServer } from "apollo-server-express";
 import express from "express";
-import { categories, products, reviews } from "./db";
+import { db } from "./db";
 import { Query, Product, Category, Mutation } from "./resolvers";
 import { typeDefs } from "./typeDefs";
 import {
@@ -27,9 +27,7 @@ async function StartApolloServer() {
     typeDefs: typeDefs,
     resolvers: { Query, Product, Category, Mutation },
     context: {
-      categories,
-      products,
-      reviews,
+      db,
     },
     plugins: [
       // Install a landing page plugin based on NODE_ENV

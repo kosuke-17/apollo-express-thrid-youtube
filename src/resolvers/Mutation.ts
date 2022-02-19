@@ -10,11 +10,7 @@ const Mutation = {
    * @param context - カテゴリー一覧情報
    * @returns 追加したカテゴリー
    */
-  addCategory: (
-    _parent: any,
-    { input }: InputName,
-    { categories }: Categories
-  ) => {
+  addCategory: (_parent: any, { input }: InputName, { db }: any) => {
     const product: [Product] = [
       {
         id: "",
@@ -33,7 +29,7 @@ const Mutation = {
       name,
       products: product,
     };
-    categories.push(newCategory);
+    db.categories.push(newCategory);
     return newCategory;
   },
   /**
@@ -44,7 +40,7 @@ const Mutation = {
    * @param context - 商品一覧情報
    * @returns 追加した商品情報
    */
-  addProduct: (_parent: any, { input }: any, { products }: any) => {
+  addProduct: (_parent: any, { input }: any, { db }: any) => {
     const { name, description, image, quantity, price, onSale, CategoryId } =
       input;
 
@@ -59,7 +55,7 @@ const Mutation = {
       CategoryId,
     };
 
-    products.push(newProduct);
+    db.products.push(newProduct);
 
     return newProduct;
   },
@@ -72,7 +68,7 @@ const Mutation = {
    * @param context - レビュー一覧情報
    * @returns 追加した商品情報
    */
-  addReview: (_parent: any, { input }: any, { reviews }: any) => {
+  addReview: (_parent: any, { input }: any, { db }: any) => {
     const { title, comment, date, rating, productId } = input;
     const newReview = {
       id: uuid(),
@@ -82,7 +78,7 @@ const Mutation = {
       rating,
       productId,
     };
-    reviews.push(newReview);
+    db.reviews.push(newReview);
     return newReview;
   },
 };
